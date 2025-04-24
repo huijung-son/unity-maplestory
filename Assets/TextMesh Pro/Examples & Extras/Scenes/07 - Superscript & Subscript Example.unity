@@ -98,8 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: 955cc2a4737565a4293837beb489fb59,
-    type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 955cc2a4737565a4293837beb489fb59, type: 2}
 --- !u!196 &5
 NavMeshSettings:
   serializedVersion: 2
@@ -165,8 +164,7 @@ MonoBehaviour:
   m_text: '<u>9x<sup><#00ff00>3</color></sup></u> + <u>4x</u><sup><#00ff00>2</color></sup>
     + <u>2x + 4 = 0</u>
 
-    <#ffff00><u><i><#ff8000><b>Propane</b></i></u></color>
-    = <u>C<sub><#ffff00>3</color></sub>H<sub><#ffff00>8</color></sub></u>'
+    <#ffff00><u><i><#ff8000><b>Propane</b></i></u></color> = <u>C<sub><#ffff00>3</color></sub>H<sub><#ffff00>8</color></sub></u>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}

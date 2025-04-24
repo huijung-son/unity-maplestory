@@ -98,8 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: 500878462c972a14d87cb770d2b59923,
-    type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 500878462c972a14d87cb770d2b59923, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -433,8 +432,7 @@ MonoBehaviour:
   ShowTextBounds: 0
   ObjectStats: 'Characters: 70   Words: 10   Spaces: 10   Sprites: 0   Links: 2
 
-    Lines:
-    4   Pages: 1'
+    Lines: 4   Pages: 1'
   m_TextComponent: {fileID: 1647263048}
 --- !u!114 &1647263047
 MonoBehaviour:
@@ -802,6 +800,5 @@ MonoBehaviour:
   ShowTextBounds: 0
   ObjectStats: 'Characters: 69   Words: 10   Spaces: 9   Sprites: 0   Links: 2
 
-    Lines:
-    4   Pages: 1'
+    Lines: 4   Pages: 1'
   m_TextComponent: {fileID: 0}
