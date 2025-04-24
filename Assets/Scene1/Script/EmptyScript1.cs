@@ -26,17 +26,17 @@ public class EmptyScript1 : MonoBehaviour
 
         GameObject prefabToUse = (genderDropdown.value == 0) ? malePrefab : femalePrefab;
         currentPreview = Instantiate(prefabToUse, new Vector3(0, 0, 0), Quaternion.identity);
-        currentPreview.transform.rotation = Quaternion.Euler(0, 180, 0); // Á¤¸é º¸±â
+        currentPreview.transform.rotation = Quaternion.Euler(0, 180, 0); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 
     void CreateCharacter()
     {
-        string characterName = nameInput.text;
-        int gender = genderDropdown.value;
-        int hair = hairDropdown.value;
+        // string characterName = nameInput.text;
+        // int gender = genderDropdown.value;
+        // int hair = hairDropdown.value;
+        //
+        // Debug.Log($"Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: ï¿½Ì¸ï¿½ = {characterName}, ï¿½ï¿½ï¿½ï¿½ = {(gender == 0 ? "ï¿½ï¿½" : "ï¿½ï¿½")}, ï¿½ï¿½ï¿½ = {hair}");
 
-        Debug.Log($"Ä³¸¯ÅÍ »ý¼ºµÊ: ÀÌ¸§ = {characterName}, ¼ºº° = {(gender == 0 ? "³²" : "¿©")}, Çì¾î = {hair}");
-
-        // ½ÇÁ¦ °ÔÀÓ µ¥ÀÌÅÍ¿¡ ÀúÀåÇÏ°Å³ª ´ÙÀ½ ¾ÀÀ¸·Î ³Ñ±â´Â ·ÎÁ÷ Ãß°¡
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°Å³ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ±ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
     }
 }
