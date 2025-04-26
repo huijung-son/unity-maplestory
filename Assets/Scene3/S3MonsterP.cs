@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum DropItem { GameObject, dropItem ,name, cnt};//??
@@ -24,8 +25,10 @@ public struct MonsterData
     public int cntObj;
 }
 
-public abstract class MonsterP_MP : MonoBehaviour
+
+public abstract class S3MonsterP : MonoBehaviour
 {
+    public List<MonsterData> MonList = new List<MonsterData>();
     public MonsterData monData;
 
     bool ismonMove = false;
@@ -48,31 +51,8 @@ public abstract class MonsterP_MP : MonoBehaviour
         }
     }      
     public abstract void MonTargetFllowMoveing();
-    public virtual void MonDead()
-    {
-
-    }
-    public virtual void MonSpawn(int spawnCnt)
-    {
-        //몬스터 스폰타임, 몬스터 생성 위치, 현재 몬스터 수 //
-        for (int i = 0; i< spawnCnt; ++i)
-        {
-            int rndInx = Random.Range(0, 6);
-            GameObject monGo =
-                Instantiate(monData.monster);
-           // monGo.AddComponent
-        }
-    }
-        
+    public abstract void MonDead();
     public abstract void MonAtk();
     public abstract void MonDropItem();
-
-    public virtual void MonItmeSpawnRand(int _randIdx, Transform _monPos)
-    {
-        for(int i = 0; i < _randIdx; ++i)
-        {
-
-        }
-    }
 
 }
