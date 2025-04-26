@@ -51,6 +51,7 @@ public abstract class S3MonsterP : MonoBehaviour
         }
     }      
     public abstract void MonTargetFllowMoveing();
+    public abstract IEnumerator MonMovingCrt();
     public abstract void MonDead();
     public abstract void MonAtk();
     public abstract void MonDropItem();

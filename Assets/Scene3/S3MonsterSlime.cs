@@ -11,12 +11,11 @@ public class S3MonsterSlime : S3MonsterP
     private Animator ani = null;
     private Material aniMaterial = null;
     private Transform tr = null;
+    private float monDis = 3f;
+    private Rigidbody2D rb = null;
+    private WaitForSeconds wait6Sec = new WaitForSeconds(6);
 
-    private void OnEnable()
-    {
-       // CallbackMonDropItem += MonDropItem;
-    }
-
+   
     private void Awake()
     {
         monPrefab = Resources.Load<GameObject>("Scene3\\Prefabs\\Monster\\monSlime\\Slime");
@@ -25,30 +24,26 @@ public class S3MonsterSlime : S3MonsterP
         // GameObject monDropItem
         ani = gameObject.GetComponent<Animator>();
         tr = gameObject.GetComponent<Transform>();
+        rb = gameObject.GetComponent<Rigidbody2D>();
+  
     }
     private void Update()
     {
-        float h = Input.GetAxis("Horizontal");
-        ani.SetBool("ismove", h != 0f);
-        Vector3 moveVelocity = Vector3.zero;
-        if (h != 0f)
-        {
-            if(h < 0f)
-            {
-                moveVelocity = Vector3.left;
-                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, 0);
-            }
-            else
-            {
-                moveVelocity = Vector3.right;
-                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, 0);  
-            }
-            transform.position += moveVelocity *  Time.deltaTime * 2f;
-        }
 
-        
+
     }
 
+    private void OnCollisionEnter2D(Collision2D _collision)
+    {
+        //if (rb != null)
+        Debug.Log(_collision);
+        if (_collision.gameObject.CompareTag("Land"))
+            {
+                Debug.Log(_collision);
+                StartCoroutine("MonMovingCrt");
+            }
+
+    }
     public override void MonInitSetting()
     {
         monData.monster = monPrefab;
@@ -60,15 +55,39 @@ public class S3MonsterSlime : S3MonsterP
         monData.defPhysical = 10f;
         monData.atkMagical = 19f;
         monData.defMagical = 10f;
-        monData.speed = -20f;
+        monData.speed = 0.1f;
         monData.dropItem = monItemsPrefab;
     }
 
-    //public override void MonMoving()
-    //{
+    public override IEnumerator MonMovingCrt()
+    {
+        float h = Input.GetAxis("Horizontal");
+       // ani.SetBool("ismove", h != 0f);
+        Vector3 moveVelocity = Vector3.zero;
        
+        {
+            //yield return null;
+          
+            
+                while (true)
+                {
+                    ani.SetBool("ismove", true);
+                    moveVelocity = Vector2.left;
+                    rb.AddForce(moveVelocity *1f, ForceMode2D.Impulse);
+                    //  GetComponent<Animator>().SetBool("OnAir", !island);
+                    yield return wait6Sec;
+                }
+                        
+            
+            //{ }
+            //    transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, 0);
+            //    moveVelocity = Vector3.right;
+            //    transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, 0);
+           
+            //  transform.position += moveVelocity * Time.deltaTime * 2f;
+        }
 
-    //}
+    }
 
     public override void MonTargetFllowMoveing()
     {
