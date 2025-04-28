@@ -59,4 +59,5 @@ public class S3MonsterMng : MonoBehaviour
             MonList.Add(monGo);
         }
     }
+    //private void 
 }
