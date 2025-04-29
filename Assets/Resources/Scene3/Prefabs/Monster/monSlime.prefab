@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 6393017197084017650}
   - component: {fileID: 5375460151527069440}
   - component: {fileID: 1790104344474098961}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: monSlime
-  m_TagString: Untagged
+  m_TagString: monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

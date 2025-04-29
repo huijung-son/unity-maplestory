@@ -22,6 +22,7 @@ public class S3MonsterSlime : S3MonsterP
     float direction = 0.2f;
 
 
+
     private void Awake()
     {
         monPrefab = Resources.Load<GameObject>("Scene3\\Prefabs\\Monster\\monSlime\\Slime");
@@ -32,14 +33,16 @@ public class S3MonsterSlime : S3MonsterP
         tr = gameObject.GetComponent<Transform>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         land = GameObject.FindWithTag("Land");
-        currentPosition = transform.position.x;
+        //currentPosition = transform.position.x;
     }
 
     private void Start()
     {
         //rbLand = land.GetComponent<Rigidbody2D>();
         cbLand = land.GetComponent<BoxCollider2D>();
-        //StartCoroutine("MonMovingCrt");
+       StartCoroutine("MonMovingCrt");
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("monster"), LayerMask.NameToLayer("monster"), true);
+
 
     }
     private void Update()
@@ -48,18 +51,33 @@ public class S3MonsterSlime : S3MonsterP
      
 
     }
-    //private void OnCollisionStay(Collision collision)
-    //{
-        
 
-    private void OnCollisionEnter2D(Collision2D _collision)
+
+
+    private void OnCollisionStay2D(Collision2D _collision)
     {
         //if (rb != null)
 
-        if (_collision.gameObject.CompareTag("Land"))
-        {
-            StartCoroutine("MonMovingCrt");// StartCoroutine 매니저가 하면 좋음
-        }
+        //if (_collision.gameObject.CompareTag("Land"))
+        //{
+        //    StartCoroutine("MonMovingCrt");// StartCoroutine 매니저가 하면 좋음
+        //}
+
+    }
+
+    //private void OnCollisionEnter2D(Collision2D _collision)
+    //{
+    //    //if (rb != null)
+
+    //    if (_collision.gameObject.CompareTag("Land"))
+    //    {
+    //        StartCoroutine("MonMovingCrt");// StartCoroutine 매니저가 하면 좋음
+    //    }
+    //}
+
+    public static void IgnoreCollision (Collider2D _colider1_2D, Collider2D _colider2_2D)
+    {
+
     }
 
     public override void MonInitSetting()
@@ -77,98 +95,94 @@ public class S3MonsterSlime : S3MonsterP
         monData.dropItem = monItemsPrefab;
     }
 
+    //public override IEnumerator MonMovingCrt()
+    //{
+    //    float h = Input.GetAxis("Horizontal");
+    //   // ani.SetBool("ismove", h != 0f);
+    //    Vector3 moveVelocity = Vector3.zero;
+    //    yield return null;
+    //    {
+    //        while (true)
+    //        {
+    //            float rbaX = rb.transform.position.x;
+    //            // float rblandX = rbLand.transform.position.x;
+    //            float cbLandXHalf = cbLand.size.x * 0.5f;
+    //            float landCenter = land.transform.position.x;
+    //            float landRightEnd = landCenter + cbLandXHalf - 1f;
+    //            float LandLeftEnd = landCenter + (-cbLandXHalf) + 1f;
+    //            Debug.Log("슬라임rb 위치" + rbaX);
+    //            Debug.Log("랜드 왼 끝" + LandLeftEnd);
+    //            Debug.Log("랜드 오 끝" + landRightEnd);
+    //            Debug.Log("랜드 반" + cbLandXHalf);
+    //            ani.SetBool("ismove", true);
+    //            moveVelocity.x +=  Time.time * direction;
+    //            float y = transform.position.y;
+    //            Debug.Log("떨어진 y값" + y);
+
+    //            if ((int)rbaX == LandLeftEnd)
+    //            {
+    //               direction = -1;
+    //            }
+
+    //            else if ((int)rbaX == landRightEnd)
+    //            {
+    //                direction *= -1;
+    //            }
+
+    //            transform.Translate(moveVelocity *0.5f);
+    //            yield return wait6Sec;
+    //        }  
+    //    }
+
+    //}
+
     public override IEnumerator MonMovingCrt()
     {
         float h = Input.GetAxis("Horizontal");
-       // ani.SetBool("ismove", h != 0f);
         Vector3 moveVelocity = Vector3.zero;
         yield return null;
-        {
-            //yield return null;
-            //while (true)
-            //{
-
-            //    ani.SetBool("ismove", true);
-
-            //    moveVelocity = Vector2.left;
-            //    transform.Translate(moveVelocity *0.1f);
-            //    //  GetComponent<Animator>().SetBool("OnAir", !island);
-            //    yield return wait6Sec;
-            //}
+        
+           float rbaX = rb.transform.position.x;
+            float cbLandXHalf = cbLand.size.x * 0.5f;
+            float landCenter = land.transform.position.x;
+            float landRightEnd = landCenter + cbLandXHalf - 1f;
+            float landLeftEnd = landCenter + (-cbLandXHalf) + 1f;
+            float t = 0f;
+            
             while (true)
             {
-                float rbaX = rb.transform.position.x;
                 // float rblandX = rbLand.transform.position.x;
-                float cbLandXHalf = cbLand.size.x * 0.5f;
-                float landCenter = land.transform.position.x;
-                float landRightEnd = landCenter + cbLandXHalf - 0.1f;
-                float LandLeftEnd = landCenter + (-cbLandXHalf) + 0.1f;
-                Debug.Log("슬라임rb 위치" + rbaX);
-                Debug.Log("랜드 왼 끝" + LandLeftEnd);
+         
+               Debug.Log("슬라임rb 위치" + rbaX);
+                Debug.Log("랜드 왼 끝" + landLeftEnd);
+                Debug.Log("랜드 오 끝" + landRightEnd);
                 Debug.Log("랜드 반" + cbLandXHalf);
                 ani.SetBool("ismove", true);
-                //moveVelocity = Vector2.Left;
-                //if (!(rbaX < cbLandXHalf + landCenter || rbaX < (-cbLandXHalf) + landCenter))
-                //    yield return null ;//만약 슬라임의 위치가 랜드 중심점에서 랜드반만큼의 크기가 작다면
-
-                //transform.Translate(new Vector2(1, 0) * 0.06f);
-                //currentPosition += Time.deltaTime * direction;
-                moveVelocity.x +=  Time.time * direction;
                 float y = transform.position.y;
+            moveVelocity.x = landLeftEnd;
+            rb.transform.position = Vector2.Lerp(rb.transform.position, moveVelocity, t);
+                t += Time.deltaTime * 0.002f;
+
                 Debug.Log("떨어진 y값" + y);
-                //transform.Translate(new Vector3(currentPosition, 0, 0));
-                if ((int)rbaX >= LandLeftEnd)
-                {
-                    //
-                    // float rbAbsX = rbaX < 0 ? -1 : 1;
-                    //moveVelocity.x = landRightEnd;
-                    // moveVelocity = Vector2.left;
-                    // transform.Translate(moveVelocity * 0.1f);
-                    // transform.Translate(moveVelocity * 0.06f);
 
-                    direction *= -1;
-                    //currentPosition = LandLeftEnd;
+                if ((int)rbaX <= landLeftEnd )
+                {
+                //moveVelocity *= -1;
+                yield return moveVelocity.x = landRightEnd;
                 }
 
-                else if ((int)rbaX >= landRightEnd)
+                if ((int)rbaX == landRightEnd)
                 {
-                    //moveVelocity.x = LandLeftEnd;
-                    //moveVelocity = Vector2.right;
-                    //transform.Translate(moveVelocity * 0.1f);
-                    //transform.Translate(moveVelocity * 0.06f);
-                    direction *= -1;
-                   // currentPosition = landRightEnd;
+                // moveVelocity *= -1;
+                yield return  moveVelocity.x = landLeftEnd;
                 }
-                //transform.position = new Vector3(currentPosition, y, 0);
 
+                if (t >= 1f) t = 0f;
 
-                //else if ((rbaX < cbLandXHalf + landCenter || rbaX < (-cbLandXHalf) + landCenter))
-                //{
-                //    // moveVelocity = Vector2.left;
-                //    float rbAbsX = rbaX < landCenter ? -1 : 1;
-                //   yield return moveVelocity.x = rbAbsX;
-                //    //transform.Translate(moveVelocity * 0.06f);
-                //}
-
-                //moveVelocity.x = moveVelocity.x * -1;
-                //else if (rbaX < ((-cbLandXHalf) + landCenter))
-                //{
-                //    moveVelocity = new Vector2(1, 0);
-                //}
-                transform.Translate(moveVelocity *2);
-                //transform.position = transform.position + ((new Vector3(currentPosition, y, 0) - transform.position).normalized * Time.deltaTime * direction);
-                //transform.position = new Vector3(currentPosition, 0, 0);
-                // transform.position = transform.position + ((new Vector3(currentPosition, y, 0) - transform.position).normalized * Time.deltaTime * 2f);
-                yield return wait6Sec;
+                yield return null;
             }
 
-            //{ }
-            //    transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, 0);
-            //    moveVelocity = Vector3.right;
-            //    transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, 0);
-
-          
-        }
+        
 
     }
 

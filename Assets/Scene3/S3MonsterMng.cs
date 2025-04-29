@@ -51,7 +51,7 @@ public class S3MonsterMng : MonoBehaviour
         //몬스터 스폰타임, 몬스터 생성 위치, 현재 몬스터 수 //
         for (int i = 0; i < spawnCnt; ++i)
         {
-            int rndInx = Random.Range(0, 6);
+            float rndInx = Random.Range(0, 6);
             GameObject monGo =
                 Instantiate(monPrefab);
             monGo.transform.SetParent(transform);
