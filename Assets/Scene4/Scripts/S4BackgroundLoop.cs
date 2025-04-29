@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class GroundLoop : MonoBehaviour
+public class S4BackgroundLoop : MonoBehaviour
 {
     private float width;
 
     private void Awake()
     {
-        BoxCollider2D groundCollider = GetComponent<BoxCollider2D>();
-        width = groundCollider.size.x;
+        BoxCollider2D backgroundCollider = GetComponent<BoxCollider2D>();
+        width = backgroundCollider.size.x;
     }
 
     private void Update()
