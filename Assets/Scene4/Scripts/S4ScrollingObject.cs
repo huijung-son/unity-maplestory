@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ScrollingObject : MonoBehaviour
+public class S4ScrollingObject : MonoBehaviour
 {
     private float speed = 1f;
 
