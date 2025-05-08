@@ -36,7 +36,7 @@ public class S3MonsterMng : MonoBehaviour
     }
     private void Start()
     {
-        MonSpawn(6);
+        MonSpawn(1);
     }
 
     public void Save()
@@ -51,9 +51,8 @@ public class S3MonsterMng : MonoBehaviour
         //몬스터 스폰타임, 몬스터 생성 위치, 현재 몬스터 수 //
         for (int i = 0; i < spawnCnt; ++i)
         {
-            float rndInx = Random.Range(0, 6);
-            GameObject monGo =
-                Instantiate(monPrefab);
+            float rndInx = Random.Range(0f, 6f);
+            GameObject monGo = Instantiate(monPrefab);
             monGo.transform.SetParent(transform);
             monGo.transform.localPosition = new Vector3(rndInx, transform.localPosition.y, transform.localPosition.x);
             MonList.Add(monGo);

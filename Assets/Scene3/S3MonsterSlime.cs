@@ -21,6 +21,12 @@ public class S3MonsterSlime : S3MonsterP
     float currentPosition;
     float direction = 0.2f;
 
+    // ---
+    private Vector3 moveVelocity = Vector3.left;
+    float cbLandXHalf = 0f;
+    float landCenter = 0f;
+    float landRightEnd = 0f;
+    float landLeftEnd = 0f;
 
 
     private void Awake()
@@ -34,23 +40,40 @@ public class S3MonsterSlime : S3MonsterP
         rb = gameObject.GetComponent<Rigidbody2D>();
         land = GameObject.FindWithTag("Land");
         //currentPosition = transform.position.x;
+
     }
 
     private void Start()
     {
         //rbLand = land.GetComponent<Rigidbody2D>();
         cbLand = land.GetComponent<BoxCollider2D>();
-       StartCoroutine("MonMovingCrt");
+       //StartCoroutine("MonMovingCrt");
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("monster"), LayerMask.NameToLayer("monster"), true);
 
-
+        cbLandXHalf = cbLand.size.x * 0.5f;
+        landCenter = land.transform.position.x;
+        landRightEnd = landCenter + cbLandXHalf - 0.5f;
+        landLeftEnd = landCenter + (-cbLandXHalf) + 0.5f;
+        StartCoroutine("MonMovingCrt");
     }
+
     private void Update()
     {
-        //슬람임 랜드조건,,
-     
-
+        
     }
+
+    //private void Update()
+    //{
+    //    if (transform.position.x <= landLeftEnd)
+    //    {
+    //        moveVelocity = Vector3.right;
+    //    }
+    //    if (transform.position.x >= landRightEnd)
+    //    {
+    //        moveVelocity = Vector3.left;
+    //    }
+    //    transform.position += Time.deltaTime * 1f * moveVelocity;
+    //}
 
 
 
@@ -75,10 +98,6 @@ public class S3MonsterSlime : S3MonsterP
     //    }
     //}
 
-    public static void IgnoreCollision (Collider2D _colider1_2D, Collider2D _colider2_2D)
-    {
-
-    }
 
     public override void MonInitSetting()
     {
@@ -136,56 +155,39 @@ public class S3MonsterSlime : S3MonsterP
 
     //}
 
+
+
     public override IEnumerator MonMovingCrt()
     {
         float h = Input.GetAxis("Horizontal");
-        Vector3 moveVelocity = Vector3.zero;
+        Vector3 moveVelocity = Vector3.zero; 
         yield return null;
-        
-           float rbaX = rb.transform.position.x;
-            float cbLandXHalf = cbLand.size.x * 0.5f;
-            float landCenter = land.transform.position.x;
-            float landRightEnd = landCenter + cbLandXHalf - 1f;
-            float landLeftEnd = landCenter + (-cbLandXHalf) + 1f;
-            float t = 0f;
-            
+        {
             while (true)
             {
-                // float rblandX = rbLand.transform.position.x;
-         
-               Debug.Log("슬라임rb 위치" + rbaX);
-                Debug.Log("랜드 왼 끝" + landLeftEnd);
-                Debug.Log("랜드 오 끝" + landRightEnd);
-                Debug.Log("랜드 반" + cbLandXHalf);
-                ani.SetBool("ismove", true);
-                float y = transform.position.y;
-            moveVelocity.x = landLeftEnd;
-            rb.transform.position = Vector2.Lerp(rb.transform.position, moveVelocity, t);
-                t += Time.deltaTime * 0.002f;
-
-                Debug.Log("떨어진 y값" + y);
-
-                if ((int)rbaX <= landLeftEnd )
+                float rbaX = transform.position.x; //몬스터의 값
+                float cbLandXHalf = cbLand.size.x * 0.5f; //랜드콜라이더 박스의 절반 : 4
+                float landCenter = land.transform.position.x; // 월드에서 랜드의 중심 x값 ex2
+                float landRightEnd = landCenter + cbLandXHalf - 1f; //2 + 4 - 1 = 3f 몬스터가 갈 수 있는 최대 오른쪽의 수
+                float LandLeftEnd = landCenter + (-cbLandXHalf) + 1f;// 2 + (-4) + 1 = -3f 몬스터가 갈 수 있는 최대 왼쪽
+                
+                ani.SetBool("ismove", true); //스프라이시티 무브 트루로하기
+                moveVelocity.x = Time.deltaTime * direction * 5f; // move Vellocity.x 값을 시간과 방향으로 지정
+                float y = transform.position.y; // 스폰완료시 떨어진 와이값으로 지정
+                Debug.Log("떨어진 y값" + y); // 
+                if (rbaX <= LandLeftEnd) // 현재 몬스터의 리지드바디값이 랜드앤드와 같아졌을 경우
                 {
-                //moveVelocity *= -1;
-                yield return moveVelocity.x = landRightEnd;
+                    direction = 0.2f; // 방향을 바꿔라
                 }
-
-                if ((int)rbaX == landRightEnd)
+                else if (rbaX >= landRightEnd) // 현재 몬스터의 리지드바디값이 랜드앤드와 같아졌을 경우
                 {
-                // moveVelocity *= -1;
-                yield return  moveVelocity.x = landLeftEnd;
+                    direction = -0.2f; // 방향을 바꿔라
                 }
-
-                if (t >= 1f) t = 0f;
-
+                transform.Translate(moveVelocity); //위에 지정된 값들로 몬스터 움직이기
                 yield return null;
             }
-
-        
-
+        }
     }
-
     public override void MonTargetFllowMoveing()
     {
 
@@ -205,6 +207,5 @@ public class S3MonsterSlime : S3MonsterP
     {
 
     }
-
 
 }
