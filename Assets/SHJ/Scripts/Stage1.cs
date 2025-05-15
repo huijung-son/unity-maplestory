@@ -6,6 +6,11 @@ public class Stage1 : MonoBehaviour
 
     [SerializeField] private GameObject background;
     [SerializeField] private GameObject foreground;
+
+    [SerializeField] private GameObject wall1;
+    [SerializeField] private GameObject wall2;
+    [SerializeField] private GameObject wall3;
+    
     private SpriteRenderer backSpr = null;
     private SpriteRenderer frontSpr = null;
 
@@ -35,6 +40,29 @@ public class Stage1 : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        for (int i = 0; i < foregrounds.Length; ++i)
+        {
+            if (wall1 != null)
+            {
+                GameObject newWall1 = Instantiate(wall1);
+                newWall1.transform.SetParent(foregrounds[i].transform);
+            }
+            if (wall2 != null)
+            {
+                GameObject newWall2 = Instantiate(wall2);
+                newWall2.transform.SetParent(foregrounds[i].transform, false);
+            }
+            if (wall3 != null)
+            {
+                GameObject newWall3 = Instantiate(wall3);
+                newWall3.transform.SetParent(foregrounds[i].transform);
+            }
+        }
+
+    }
+
     private void Update()
     {
         foreach (GameObject go in backgrounds)
@@ -56,6 +84,23 @@ public class Stage1 : MonoBehaviour
                 Vector3 newPos = go.transform.position;
                 newPos.x = foregrounds[index].transform.position.x + frontSpr.sprite.bounds.size.x;
                 go.transform.position = newPos;
+                SpriteRenderer[] walls = go.GetComponentsInChildren<SpriteRenderer>();
+
+                for (int i = 0; i < walls.Length; ++i)
+                {
+                    if (walls[i].gameObject.name.Contains("1"))
+                    {
+
+                    }
+                    if (walls[i].gameObject.name.Contains("2"))
+                    {
+
+                    }
+                    if (walls[i].gameObject.name.Contains("3"))
+                    {
+
+                }
+                }
             }
         }
     }

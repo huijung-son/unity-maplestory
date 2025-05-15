@@ -46,3 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   background: {fileID: 521531595671528544, guid: 41a9f08d27603d54895510babd4527e5, type: 3}
   foreground: {fileID: 7411797388809783397, guid: 0d3f7c764fbbb274cacbddb9872c86cb, type: 3}
+  wall1: {fileID: 0}
+  wall2: {fileID: 1785657533346229917, guid: c0510bcbee0e84458a2ef6880c312134, type: 3}
+  wall3: {fileID: 0}
