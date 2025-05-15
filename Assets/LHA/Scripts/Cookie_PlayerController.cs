@@ -2,11 +2,13 @@ using UnityEngine;
 
 public class Cookie_PlayerController : MonoBehaviour
 {
-    private float sinDist = 2f;
+    private float sinDist = 3f;
 
     private int jumpCount = 0;
     private bool isGrounded = false;
     private bool isDead = false;
+    private bool isSliding = true;
+    private bool isClashed = true;
 
     private Rigidbody2D playerRigidbody;
     private Animator animator;
@@ -22,21 +24,8 @@ public class Cookie_PlayerController : MonoBehaviour
         if (isDead)
         return;
 
-        if (Input.GetKeyDown(KeyCode.Space) && jumpCount < 2)
-        {
-            jumpCount++;
-            playerRigidbody.linearVelocity = Vector3.zero;
-            
-            Vector3 jumpPos = transform.position;
-
-            transform.position = jumpPos + new Vector3(0f, Mathf.Sin(2f) * sinDist, 0f);
-
-            if (jumpCount == 2)
-            {
-                animator.SetTrigger("DoubleJump");
-            }
-        }
-
+        Jumping();
+        Sliding();
         animator.SetBool("Grounded", isGrounded);
        
     }
@@ -55,7 +44,23 @@ public class Cookie_PlayerController : MonoBehaviour
         {
             Die();
         }
+
+        if (other.gameObject.name.Contains("wall"))
+        {
+            animator.SetBool("Clash", isClashed);
+        }
+
     }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.name.Contains("wall"))
+        {
+            animator.SetBool("Clash", !isClashed);
+        }
+    }
+
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -71,4 +76,36 @@ public class Cookie_PlayerController : MonoBehaviour
         isGrounded = false;
     }
 
+    private void Sliding()
+    {
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            animator.SetBool("Slide", isSliding);
+        }
+
+        if (Input.GetKeyUp(KeyCode.DownArrow))
+        {
+            animator.SetBool("Slide", !isSliding);
+        }
+    }
+
+    private void Jumping()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow) && jumpCount < 2)
+        {
+            jumpCount++;
+            playerRigidbody.linearVelocity = Vector3.zero;
+
+            Vector3 jumpPos = transform.position;
+
+            transform.position = jumpPos + new Vector3(0f, Mathf.Sin(2f) * sinDist, 0f);
+
+            if (jumpCount == 2)
+            {
+                animator.SetTrigger("DoubleJump");
+            }
+        }
+    }
+
+    
 }
