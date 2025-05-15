@@ -1,9 +1,8 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Cookie_PlayerController : MonoBehaviour
 {
-    public float jumpForce = 300f;
+    private float sinDist = 2f;
 
     private int jumpCount = 0;
     private bool isGrounded = false;
@@ -23,19 +22,23 @@ public class Cookie_PlayerController : MonoBehaviour
         if (isDead)
         return;
 
-        if (Input.GetKeyDown(KeyCode.UpArrow) && jumpCount < 2)
+        if (Input.GetKeyDown(KeyCode.Space) && jumpCount < 2)
         {
             jumpCount++;
-            playerRigidbody.linearVelocity = Vector2.zero;
-            playerRigidbody.AddForce(new Vector2(0, jumpForce));
-        }
+            playerRigidbody.linearVelocity = Vector3.zero;
+            
+            Vector3 jumpPos = transform.position;
 
-        else if (Input.GetKeyUp(KeyCode.UpArrow) && playerRigidbody.linearVelocity.y > 0)
-        {
-            playerRigidbody.linearVelocity = playerRigidbody.linearVelocity * 0.5f;
+            transform.position = jumpPos + new Vector3(0f, Mathf.Sin(2f) * sinDist, 0f);
+
+            if (jumpCount == 2)
+            {
+                animator.SetTrigger("DoubleJump");
+            }
         }
 
         animator.SetBool("Grounded", isGrounded);
+       
     }
 
     private void Die()
