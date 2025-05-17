@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class S3MonsterMng : MonoBehaviour
 {
-    private static S3MonsterMng instance = null;
+    //private static S3MonsterMng instance = null;
     private GameObject monPrefab = null;
-    private GameObject[] monItemsPrefab = null;
+    //private GameObject[] monItemsPrefab = null;
     public List<GameObject> MonList = new List<GameObject>();
     //public static S3MonsterMng Instance
     //{

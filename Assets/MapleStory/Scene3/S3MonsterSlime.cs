@@ -5,20 +5,20 @@ using UnityEngine.UIElements;
 
 public class S3MonsterSlime : S3MonsterP
 {
-    public MonsterData monData;
-    bool monMove = false;
+    //public MonsterData monData;
+    //bool monMove = false;
     private GameObject monPrefab = null;
     private GameObject[] monItemsPrefab = null;
     private Animator ani = null;
-    private Material aniMaterial = null;
+    //private Material aniMaterial = null;
     private Transform tr = null;
-    private float monDis = 3f;
+    //private float monDis = 3f;
     private Rigidbody2D rb = null;
     private WaitForSeconds wait6Sec = new WaitForSeconds(6);
-    private Rigidbody2D rbLand = null;
+    //private Rigidbody2D rbLand = null;
     private BoxCollider2D cbLand = null;
     private GameObject land = null;
-    float currentPosition;
+    //float currentPosition;
     float direction = 0.2f;
 
     // ---
