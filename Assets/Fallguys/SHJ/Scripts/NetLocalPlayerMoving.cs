@@ -1,18 +1,24 @@
-using Unity.Netcode;  // Netcode for GameObjects 사용 시
+using Unity.Netcode;
 using UnityEngine;
 
 public class NetLocalPlayerMoving : NetworkBehaviour
 {
-    [Header("카메라 오프셋")]
+    [Header("camera offset")]
     public Vector3 cameraOffset = new Vector3(0f, 2f, -4f);
 
     private Camera mainCam;
+    private Rigidbody rb = null;
     
     private float rotX = 0f;
     private float rotY = 0f;
     private float mouseSensitivity = 130f;
 
     private float moveSpeed = 5f;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
     void Start()
     {
@@ -42,6 +48,11 @@ public class NetLocalPlayerMoving : NetworkBehaviour
         float axisH = Input.GetAxis("Horizontal");
         float axisV = Input.GetAxis("Vertical");
         PlayerMoving(axisH, axisV);
+        
+        if (rb != null && Input.GetKeyDown(KeyCode.Space)) {
+            Vector3 jumpVelocity = Vector3.up * Mathf.Sqrt(10f * -Physics.gravity.y);
+            rb.AddForce(jumpVelocity, ForceMode.Impulse);
+        }
     }
 
     private void PlayerYaw(float _axisX)
