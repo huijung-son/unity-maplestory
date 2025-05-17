@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class FG_GM : MonoBehaviour
 {
-    [SerializeField] private FG_BarPlayer barHead = null;
-    [SerializeField] private NetLocalPlayerMoving player = null;
+    //[SerializeField] private FG_BarPlayer barHead = null;
+    //[SerializeField] private N player = null;
 
-    private void Update()
-    {
-        DisplayPlayerBar();
-    }
+    //private void Update()
+    //{
+    //    DisplayPlayerBar();
+    //}
 
-    private void DisplayPlayerBar()
-    {   
-        barHead.UpdatePosition(player.gameObject.transform.position);
-    }
+    //private void DisplayPlayerBar()
+    //{   
+    //    barHead.UpdatePosition(player.gameObject.transform.position);
+    //}
 
 }
