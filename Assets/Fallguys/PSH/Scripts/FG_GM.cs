@@ -3,7 +3,7 @@ using UnityEngine;
 public class FG_GM : MonoBehaviour
 {
     [SerializeField] private FG_BarPlayer barHead = null;
-    [SerializeField] private FG_Player player = null;
+    [SerializeField] private NetLocalPlayerMoving player = null;
 
     private void Update()
     {
@@ -12,7 +12,7 @@ public class FG_GM : MonoBehaviour
 
     private void DisplayPlayerBar()
     {   
-        barHead.UpdatePosition(player.transform.position);
+        barHead.UpdatePosition(player.gameObject.transform.position);
     }
 
 }
