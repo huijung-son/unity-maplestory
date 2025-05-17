@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/MapleStory/Scenes/Scene4.unity
     guid: 3625007d6c6e9044b8bf37cc97ffa167
   - enabled: 1
-    path: Assets/Fallguys/SHJ/NGO_Minimal_Setup/NGO_Setup.unity
+    path: Assets/Fallguys/SHJ/Scenes/SHJFallguysScene.unity
     guid: df0360c4813c04c18b971e4deed29953
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
