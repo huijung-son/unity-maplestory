@@ -1,16 +1,13 @@
-using UnityEngine;
-
-public class FG_GameStateOnlyPSH : MonoBehaviour
+public class FGGameState
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public enum FGameState { Play, OpenUI }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    private static FGameState curState = FGameState.Play;
+
+
+    public static void Play() { curState = FGameState.Play; }
+    public static void OpenUI() { curState = FGameState.OpenUI; }
+
+    public static bool IsPlay() { return curState == FGameState.Play; }
+    public static bool IsOpenUI() { return curState == FGameState.OpenUI; }
 }
