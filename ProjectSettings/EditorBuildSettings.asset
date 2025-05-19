@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Fallguys/Scenes/FallguysDemoScene.unity
     guid: 0757c8b6a10764ae494441dd2a1963c2
+  - enabled: 1
+    path: Assets/Fallguys/PSH/Scenes/fallGuysPSH.unity
+    guid: 87d65efaedf10404ca4b09c669cf8f0b
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

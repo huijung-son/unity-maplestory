@@ -7,19 +7,15 @@ public class FG_UIInven_MGRadio: MonoBehaviour
 {
     //[SerializeField] private GameObject[] _mnuList;
     //[SerializeField] private Button[] firstSelected;
-    [SerializeField] private GameObject prefab = null;
     [SerializeField] private Sprite[] levelPics;
     [SerializeField] private Canvas picsFeild;
-    [SerializeField] private TextMeshProUGUI textField;
+    public TextMeshProUGUI isChangeText = null; // ¹Ù²Þ
 
-    //private void Awake()
-    //{
-    //    prefab = GetComponent<GameObject>();
-    //}
-    public void OnValueChangedWithSlider(float _value)
+    private void Awake()
     {
-        Debug.Log("OnValueChangedWithSlider: " + _value);
+        isChangeText = picsFeild.GetComponentInChildren<TextMeshProUGUI>();
     }
+
 
     public void Toggle(Toggle _toggle)
     {
@@ -28,12 +24,10 @@ public class FG_UIInven_MGRadio: MonoBehaviour
             switch (_toggle.name)
             {
                 case "SkinToggle":
-                    //picsFeild.gameObject = prefab;
-                    textField.text = "Skin";
+                    isChangeText.text = "Skin";
                     break;
                 case "ItemToggle":
-                    //_piField.
-                    textField.text = "Item";
+                    isChangeText.text = "Item";
                     break;
             }
         }
